@@ -154,6 +154,7 @@ class CurrencyUnrealizedReport(report_sxw.rml_parse):
             sorted_accounts.append(root_account_data['id'])
             sorted_accounts.extend(
                 recursive_sort_by_code(accounts_data, root_account_data))
+
         # fallback to unsorted accounts when sort failed
         # sort fails when the levels are miscalculated by account.account
         # check lp:783670

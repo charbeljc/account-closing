@@ -47,8 +47,8 @@ class AccountAccount(orm.Model):
                    "balance",
         'debit': "COALESCE(SUM(l.debit), 0) as debit",
         'credit': "COALESCE(SUM(l.credit), 0) as credit",
-        'foreign_balance': "COALESCE(SUM(l.amount_currency), 0) as foreign_"
-                           "balance",
+        'foreign_balance': "COALESCE(SUM(l.amount_currency), 0) as "
+                           "foreign_balance",
     }
 
     def _revaluation_query(self, cr, uid, ids,

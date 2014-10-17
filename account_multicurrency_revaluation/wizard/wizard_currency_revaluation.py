@@ -259,6 +259,7 @@ class WizardCurrencyrevaluation(orm.TransientModel):
         move_line_obj = self.pool.get('account.move.line')
         period_obj = self.pool.get('account.period')
         user_obj = self.pool.get('res.users')
+
         company = form.journal_id.company_id or user_obj.browse(
             cr, uid, uid).company_id
         period_ids = period_obj.search(
@@ -293,7 +294,9 @@ class WizardCurrencyrevaluation(orm.TransientModel):
                     'credit': amount,
                     'account_id': company.revaluation_gain_account_id.id,
                     'move_id': move_id,
-                    'analytic_account_id': analytic_acc_id,
+                    'analytic_account_id':
+                    company.revaluation_analytic_account_id and
+                    company.revaluation_analytic_account_id.id or False,
                 }
                 created_ids.append(create_move_line(move_id, line_data, sums))
             if company.provision_bs_gain_account_id and \
@@ -330,7 +333,9 @@ class WizardCurrencyrevaluation(orm.TransientModel):
                     'debit': amount,
                     'move_id': move_id,
                     'account_id': company.revaluation_loss_account_id.id,
-                    'analytic_account_id': analytic_acc_id,
+                    'analytic_account_id':
+                    company.revaluation_analytic_account_id and
+                    company.revaluation_analytic_account_id.id or False,
                 }
 
                 created_ids.append(create_move_line(move_id, line_data, sums))
@@ -382,6 +387,7 @@ class WizardCurrencyrevaluation(orm.TransientModel):
         form = self.browse(cr, uid, ids[0], context=context)
         company = form.journal_id.company_id or user_obj.browse(
             cr, uid, uid).company_id
+
         if (not company.revaluation_loss_account_id and
             not company.revaluation_gain_account_id and
             not (company.provision_bs_loss_account_id and
@@ -408,6 +414,7 @@ class WizardCurrencyrevaluation(orm.TransientModel):
                 _("No account to be revaluated found. "
                   "Please check 'Allow Currency Revaluation' "
                   "for at least one account in account form."))
+
         fiscalyear_ids = fiscalyear_obj.search(
             cr, uid,
             [('date_start', '<=', form.revaluation_date),
@@ -429,6 +436,7 @@ class WizardCurrencyrevaluation(orm.TransientModel):
                 _('Error!'),
                 _('No special period found for the fiscalyear %s' %
                   fiscalyear.code))
+
         opening_move_ids = []
         if special_period_ids:
             opening_move_ids = move_obj.search(
@@ -439,16 +447,19 @@ class WizardCurrencyrevaluation(orm.TransientModel):
                 first_move_id = move_obj.search(
                     cr, uid, [('company_id', '=', company.id)],
                     order='date', limit=1)
+
                 if not first_move_id:
                     raise osv.except_osv(_('Error!'),
                                          _('No fiscal entries found'))
                 first_move = move_obj.browse(
                     cr, uid, first_move_id[0], context=context)
+
                 if fiscalyear != first_move.period_id.fiscalyear_id:
                     raise osv.except_osv(
                         _('Error!'),
                         _('No opening entries in opening period for this '
                           'fiscal year %s' % fiscalyear.code))
+
         period_ids = [p.id for p in fiscalyear.period_ids]
         if not period_ids:
             raise osv.except_osv(_('Error!'),

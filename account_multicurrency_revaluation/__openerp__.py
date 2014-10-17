@@ -103,4 +103,7 @@ For FR
              "wizard/print_currency_unrealized_report_view.xml",
              "report/report.xml"],
     'installable': True,
+    "active": False,
+ #    'certificate': 'certificate',
  }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
