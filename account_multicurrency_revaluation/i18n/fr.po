@@ -116,7 +116,7 @@ msgstr "Compte analytique"
 #. module: account_multicurrency_revaluation
 #: field:account.move.line,gl_balance:0
 msgid "Aggregated Amount"
-msgstr "Montant agrégé"
+msgstr "Montant cumulé"
 
 #. module: account_multicurrency_revaluation
 #: field:res.company,revaluation_gain_account_id:0
@@ -136,7 +136,7 @@ msgstr "Solde à date"
 #. module: account_multicurrency_revaluation
 #: field:account.move.line,gl_foreign_balance:0
 msgid "Aggregated Amount curency"
-msgstr "Montant en devise agrégé"
+msgstr "Montant en devise cumulé"
 
 #. module: account_multicurrency_revaluation
 #: code:addons/account_multicurrency_revaluation/res_currency.py:42
