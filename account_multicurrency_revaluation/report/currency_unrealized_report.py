@@ -18,9 +18,10 @@
 #
 ##############################################################################
 
-from report import report_sxw
+from openerp.report import report_sxw
 from openerp.tools.translate import _
-import pooler
+import openerp.pooler as pooler
+
 
 
 class ShellAccount(object):
