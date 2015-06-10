@@ -103,4 +103,4 @@ For FR
              "wizard/print_currency_unrealized_report_view.xml",
              "report/report.xml"],
     'installable': True,
-}
+ }

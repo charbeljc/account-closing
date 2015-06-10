@@ -23,7 +23,6 @@ from openerp.tools.translate import _
 import openerp.pooler as pooler
 
 
-
 class ShellAccount(object):
     # Small class that avoid to override account account object
     # only for pure perfomance reason.
