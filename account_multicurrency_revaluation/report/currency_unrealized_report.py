@@ -55,9 +55,6 @@ class ShellAccount(object):
     def __contains__(self, key):
         return hasattr(self, key)
 
-    def __contains__(self, key):
-        return hasattr(self, key)
-
     def get_lines(self, period_id):
         """Get all line account move line that are need on report for current
         account.
